@@ -88,10 +88,10 @@ namespace AbstractForgeView
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(176, 132);
+            this.buttonSave.Location = new System.Drawing.Point(161, 132);
             this.buttonSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(86, 31);
+            this.buttonSave.Size = new System.Drawing.Size(101, 31);
             this.buttonSave.TabIndex = 6;
             this.buttonSave.Text = "Сохранить";
             this.buttonSave.UseVisualStyleBackColor = true;

@@ -23,7 +23,6 @@ namespace AbstractForgeView
             try
             {
                 var list = _orderLogic.Read(null);
-                // прописать логику
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -34,8 +33,7 @@ namespace AbstractForgeView
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void КомпонентыToolStripMenuItem_Click(object sender, EventArgs e)

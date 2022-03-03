@@ -1,7 +1,8 @@
 using AbstractForgeBusinessLogic.BusinessLogics;
 using AbstractForgeContracts.BusinessLogicsContracts;
 using AbstractForgeContracts.StoragesContracts;
-using AbstractForgeListImplement.Implements;
+using AbstractForgeFileImplement.Implements;
+using AbstractForgeFileImplement;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -28,12 +29,12 @@ namespace AbstractForgeView
         /// </summary>
         [STAThread]
         static void Main()
-
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(Container.Resolve<FormMain>());
+            FileDataListSingleton.FileDataListSingletonMySave();
         }
         private static IUnityContainer BuildUnityContainer()
         {
