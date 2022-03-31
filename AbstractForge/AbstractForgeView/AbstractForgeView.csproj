@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AbstractForgeBusinessLogic\AbstractForgeBusinessLogic.csproj" />
+    <ProjectReference Include="..\..\AbstractForgeContracts\AbstractForgeContracts.csproj" />
+    <ProjectReference Include="..\..\AbstractForgeListImplement\AbstractForgeListImplement.csproj" />
+  </ItemGroup>
+
+</Project>
