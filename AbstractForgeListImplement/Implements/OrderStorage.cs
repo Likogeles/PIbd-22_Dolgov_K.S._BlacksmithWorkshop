@@ -4,6 +4,7 @@ using AbstractForgeContracts.ViewModels;
 using AbstractForgeListImplement.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AbstractForgeListImplement.Implements
 {
@@ -40,7 +41,9 @@ namespace AbstractForgeListImplement.Implements
                     result.Add(CreateModel(order));
                 }
             }
-            return result;
+            return result.Where(rec => rec.Id.Equals(model.Id) || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+            .ToList();
+
         }
         
         public OrderViewModel GetElement(OrderBindingModel model)

@@ -22,7 +22,13 @@ namespace AbstractForgeDatabaseImplement.Implements
                 return null;
             }
             using var context = new AbstractForgeDatabase();
-            return context.Orders.Where(rec => rec.Status == model.Status).Select(CreateModel).ToList();
+            //return context.Orders.Where(rec => rec.Status == model.Status).Select(CreateModel).ToList();
+            return context.Orders
+            .Include(rec => rec.Manufacture)
+            .Where(rec => rec.Id.Equals(model.Id) || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+            .ToList()
+            .Select(CreateModel)
+            .ToList();
         }
         public OrderViewModel GetElement(OrderBindingModel model) {
             if (model == null)
