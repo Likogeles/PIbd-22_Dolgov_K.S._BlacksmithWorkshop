@@ -67,20 +67,14 @@ namespace AbstractForgeDatabaseImplement.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DBComponentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DBManufactureId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ManufactureId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DBComponentId");
+                    b.HasIndex("ComponentId");
 
-                    b.HasIndex("DBManufactureId");
+                    b.HasIndex("ManufactureId");
 
                     b.ToTable("ManufactureComponents");
                 });
@@ -93,9 +87,6 @@ namespace AbstractForgeDatabaseImplement.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DBManufactureId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreate")
@@ -115,7 +106,7 @@ namespace AbstractForgeDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DBManufactureId");
+                    b.HasIndex("ManufactureId");
 
                     b.ToTable("Orders");
                 });
@@ -124,11 +115,15 @@ namespace AbstractForgeDatabaseImplement.Migrations
                 {
                     b.HasOne("AbstractForgeDatabaseImplement.Models.Component", "Component")
                         .WithMany("ManufactureComponents")
-                        .HasForeignKey("DBComponentId");
+                        .HasForeignKey("ComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AbstractForgeDatabaseImplement.Models.Manufacture", "Manufacture")
                         .WithMany("ManufactureComponents")
-                        .HasForeignKey("DBManufactureId");
+                        .HasForeignKey("ManufactureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Component");
 
@@ -139,7 +134,9 @@ namespace AbstractForgeDatabaseImplement.Migrations
                 {
                     b.HasOne("AbstractForgeDatabaseImplement.Models.Manufacture", "Manufacture")
                         .WithMany("Orders")
-                        .HasForeignKey("DBManufactureId");
+                        .HasForeignKey("ManufactureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Manufacture");
                 });

@@ -1,2 +1,2 @@
-Select *
-From ManufactureComponents;
+SELECT *
+FROM ManufactureComponents

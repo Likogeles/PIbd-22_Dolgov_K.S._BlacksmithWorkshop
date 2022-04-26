@@ -42,25 +42,23 @@ namespace AbstractForgeDatabaseImplement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ManufactureId = table.Column<int>(type: "int", nullable: false),
                     ComponentId = table.Column<int>(type: "int", nullable: false),
-                    Count = table.Column<int>(type: "int", nullable: false),
-                    DBComponentId = table.Column<int>(type: "int", nullable: true),
-                    DBManufactureId = table.Column<int>(type: "int", nullable: true)
+                    Count = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ManufactureComponents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ManufactureComponents_Components_DBComponentId",
-                        column: x => x.DBComponentId,
+                        name: "FK_ManufactureComponents_Components_ComponentId",
+                        column: x => x.ComponentId,
                         principalTable: "Components",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ManufactureComponents_Manufactures_DBManufactureId",
-                        column: x => x.DBManufactureId,
+                        name: "FK_ManufactureComponents_Manufactures_ManufactureId",
+                        column: x => x.ManufactureId,
                         principalTable: "Manufactures",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,34 +72,33 @@ namespace AbstractForgeDatabaseImplement.Migrations
                     Sum = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateImplement = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DBManufactureId = table.Column<int>(type: "int", nullable: true)
+                    DateImplement = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Manufactures_DBManufactureId",
-                        column: x => x.DBManufactureId,
+                        name: "FK_Orders_Manufactures_ManufactureId",
+                        column: x => x.ManufactureId,
                         principalTable: "Manufactures",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ManufactureComponents_DBComponentId",
+                name: "IX_ManufactureComponents_ComponentId",
                 table: "ManufactureComponents",
-                column: "DBComponentId");
+                column: "ComponentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ManufactureComponents_DBManufactureId",
+                name: "IX_ManufactureComponents_ManufactureId",
                 table: "ManufactureComponents",
-                column: "DBManufactureId");
+                column: "ManufactureId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_DBManufactureId",
+                name: "IX_Orders_ManufactureId",
                 table: "Orders",
-                column: "DBManufactureId");
+                column: "ManufactureId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

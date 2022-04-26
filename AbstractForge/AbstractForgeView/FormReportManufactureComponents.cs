@@ -33,7 +33,6 @@ namespace AbstractForgeView
                     }
 
                 }
-                Console.WriteLine();
             }
             catch (Exception ex)
             {

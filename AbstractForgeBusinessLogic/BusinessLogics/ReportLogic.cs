@@ -57,35 +57,6 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             
             return list;
         }
-        /*
-        public List<ReportManufactureComponentViewModel> GetManufactureComponent()
-        {
-            var components = _componentStorage.GetFullList();
-            var manufactures = _manufactureStorage.GetFullList();
-            var list = new List<ReportManufactureComponentViewModel>();
-            foreach (var component in components)
-            {
-                var record = new ReportManufactureComponentViewModel
-                {
-                    ManufactureName = component.ComponentName,
-                    Components = new List<Tuple<string, int>>(),
-                    TotalCount = 0
-                };
-                foreach (var manufacture in manufactures)
-                {
-                    if (manufacture.ManufactureComponents.ContainsKey(component.Id))
-                    {
-                        record.Components.Add(new Tuple<string, int>(manufacture.ManufactureName,
-                       manufacture.ManufactureComponents[component.Id].Item2));
-                        record.TotalCount +=
-                       manufacture.ManufactureComponents[component.Id].Item2;
-                    }
-                }
-                list.Add(record);
-            }
-            return list;
-        }
-        */
 
         /// <summary>
         /// Получение списка заказов за определенный период

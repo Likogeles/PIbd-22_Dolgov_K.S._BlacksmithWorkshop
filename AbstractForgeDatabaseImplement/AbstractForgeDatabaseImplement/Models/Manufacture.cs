@@ -11,9 +11,9 @@ namespace AbstractForgeDatabaseImplement.Models
         public string ManufactureName { get; set; }
         [Required]
         public decimal Price { get; set; }
-        [ForeignKey("DBManufactureId")]
+        [ForeignKey("ManufactureId")]
         public virtual List<Order> Orders { get; set; }
-        [ForeignKey("DBManufactureId")]
+        [ForeignKey("ManufactureId")]
         public virtual List<ManufactureComponent> ManufactureComponents { get; set; }
     }
 }
