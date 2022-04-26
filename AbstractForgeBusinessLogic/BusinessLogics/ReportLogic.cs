@@ -39,19 +39,43 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             var components = _componentStorage.GetFullList();
             var manufactures = _manufactureStorage.GetFullList();
             var list = new List<ReportManufactureComponentViewModel>();
+            foreach (var manufacture in manufactures)
+            {
+                var record = new ReportManufactureComponentViewModel
+                {
+                    ManufactureName = manufacture.ManufactureName,
+                    Components = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+                foreach (var component in manufacture.ManufactureComponents)
+                {
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
+                }
+                list.Add(record);
+            }
+            
+            return list;
+        }
+        /*
+        public List<ReportManufactureComponentViewModel> GetManufactureComponent()
+        {
+            var components = _componentStorage.GetFullList();
+            var manufactures = _manufactureStorage.GetFullList();
+            var list = new List<ReportManufactureComponentViewModel>();
             foreach (var component in components)
             {
                 var record = new ReportManufactureComponentViewModel
                 {
-                    ComponentName = component.ComponentName,
-                    Manufactures = new List<Tuple<string, int>>(),
+                    ManufactureName = component.ComponentName,
+                    Components = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
                 foreach (var manufacture in manufactures)
                 {
                     if (manufacture.ManufactureComponents.ContainsKey(component.Id))
                     {
-                        record.Manufactures.Add(new Tuple<string, int>(manufacture.ManufactureName,
+                        record.Components.Add(new Tuple<string, int>(manufacture.ManufactureName,
                        manufacture.ManufactureComponents[component.Id].Item2));
                         record.TotalCount +=
                        manufacture.ManufactureComponents[component.Id].Item2;
@@ -61,6 +85,8 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             }
             return list;
         }
+        */
+
         /// <summary>
         /// Получение списка заказов за определенный период
         /// </summary>

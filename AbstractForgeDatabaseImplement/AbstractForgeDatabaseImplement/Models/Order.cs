@@ -18,7 +18,6 @@ namespace AbstractForgeDatabaseImplement.Models
         [Required]
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }
-
         public virtual Manufacture Manufacture { get; set; }
     }
 }

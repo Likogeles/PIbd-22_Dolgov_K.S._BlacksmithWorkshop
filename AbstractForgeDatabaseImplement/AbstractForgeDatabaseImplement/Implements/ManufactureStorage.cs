@@ -54,11 +54,16 @@ namespace AbstractForgeDatabaseImplement.Implements
         {
             using var context = new AbstractForgeDatabase();
             using var transaction = context.Database.BeginTransaction();
+
             try
             {
-                context.Manufactures.Add(CreateModel(model, new Manufacture(),
-                context));
+                Manufacture manufacture = new Manufacture() {
+                    ManufactureName = model.ManufactureName,
+                    Price = model.Price
+                };
+                context.Manufactures.Add(manufacture);
                 context.SaveChanges();
+                CreateModel(model, manufacture, context);
                 transaction.Commit();
             }
             catch
@@ -110,11 +115,9 @@ namespace AbstractForgeDatabaseImplement.Implements
             manufacture.Price = model.Price;
             if (model.Id.HasValue)
             {
-                var manufactureComponents = context.ManufactureComponents.Where(rec =>
-               rec.ManufactureId == model.Id.Value).ToList();
+                var manufactureComponents = context.ManufactureComponents.Where(rec => rec.ManufactureId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.ManufactureComponents.RemoveRange(manufactureComponents.Where(rec =>
-               !model.ManufactureComponents.ContainsKey(rec.ComponentId)).ToList());
+                context.ManufactureComponents.RemoveRange(manufactureComponents.Where(rec => !model.ManufactureComponents.ContainsKey(rec.ComponentId)).ToList());
                 context.SaveChanges();
                 // обновили количество у существующих записей
                 foreach (var updateComponent in manufactureComponents)

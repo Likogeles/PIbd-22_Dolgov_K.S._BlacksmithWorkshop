@@ -81,15 +81,16 @@
             this.Column3.Name = "Column3";
             this.Column3.Width = 125;
             // 
-            // FormReportProductComponents
+            // FormReportManufactureComponents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 450);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ButtonSaveToExcel);
-            this.Name = "FormReportProductComponents";
+            this.Name = "FormReportManufactureComponents";
             this.Text = "Компоненты по изделиям";
+            this.Load += new System.EventHandler(this.FormReportManufactureComponents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

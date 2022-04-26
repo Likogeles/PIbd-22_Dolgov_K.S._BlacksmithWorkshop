@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbstractForgeDatabaseImplement.Migrations
 {
     [DbContext(typeof(AbstractForgeDatabase))]
-    [Migration("20220329161713_InitialCreate")]
+    [Migration("20220426143025_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
