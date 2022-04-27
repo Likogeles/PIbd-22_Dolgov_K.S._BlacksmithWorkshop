@@ -9,6 +9,8 @@ namespace AbstractForgeDatabaseImplement.Models
     {
         public int Id { get; set; }
         public int ManufactureId { get; set; }
+        public int ClientId { get; set; }
+        public virtual Client Client { get; set; }
         [Required]
         public int Count { get; set; }
         [Required]

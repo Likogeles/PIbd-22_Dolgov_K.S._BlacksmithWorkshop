@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AbstractForgeBusinessLogic\AbstractForgeBusinessLogic.csproj" />
+    <ProjectReference Include="..\AbstractForgeContracts\AbstractForgeContracts.csproj" />
+    <ProjectReference Include="..\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AbstractForgeContracts\BlacksmithWorkshopContracts.csproj" />
+    <ProjectReference Include="..\..\AbstractForgeContracts\AbstractForgeContracts.csproj" />
   </ItemGroup>
 
 </Project>

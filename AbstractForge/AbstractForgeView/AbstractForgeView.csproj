@@ -15,11 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AbstractForgeBusinessLogic\BlacksmithWorkshopBusinessLogic.csproj" />
-    <ProjectReference Include="..\..\AbstractForgeContracts\BlacksmithWorkshopContracts.csproj" />
-    <ProjectReference Include="..\..\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement\BlacksmithWorkshopDatabaseImplement.csproj" />
-    <ProjectReference Include="..\..\AbstractForgeFileImplement\AbstractForgeFileImplement\BlacksmithWorkshopFileImplement.csproj" />
-    <ProjectReference Include="..\..\AbstractForgeListImplement\BlacksmithWorkshopListImplement.csproj" />
+    <ProjectReference Include="..\..\AbstractForgeBusinessLogic\AbstractForgeBusinessLogic.csproj" />
+    <ProjectReference Include="..\..\AbstractForgeContracts\AbstractForgeContracts.csproj" />
+    <ProjectReference Include="..\..\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement.csproj" />
+    <ProjectReference Include="..\..\AbstractForgeFileImplement\AbstractForgeFileImplement\AbstractForgeFileImplement.csproj" />
+    <ProjectReference Include="..\..\AbstractForgeListImplement\AbstractForgeListImplement.csproj" />
   </ItemGroup>
 
 </Project>

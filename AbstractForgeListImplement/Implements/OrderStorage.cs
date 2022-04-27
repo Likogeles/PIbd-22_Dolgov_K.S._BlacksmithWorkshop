@@ -41,8 +41,16 @@ namespace AbstractForgeListImplement.Implements
                     result.Add(CreateModel(order));
                 }
             }
-            return result.Where(rec => rec.Id.Equals(model.Id) || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-            .ToList();
+            foreach (var order in source.Orders)
+            {
+                if ((!model.DateFrom.HasValue && !model.DateTo.HasValue && order.DateCreate == model.DateCreate) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >= model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date) ||
+            (model.ClientId.HasValue && order.ClientId == model.ClientId))
+                {
+                    result.Add(CreateModel(order));
+                }
+            }
+            return result;
 
         }
         
@@ -108,6 +116,7 @@ namespace AbstractForgeListImplement.Implements
         private static Order CreateModel(OrderBindingModel model, Order order)
         {
             order.ManufactureId = model.ManufactureId;
+            order.ClientId = (int)model.ClientId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -126,11 +135,21 @@ namespace AbstractForgeListImplement.Implements
                     manufactureName = document.ManufactureName;
                 }
             }
-
+            string clientFIO = null;
+            foreach (Client client in source.Clients)
+            {
+                if (order.ClientId == client.Id)
+                {
+                    clientFIO = client.ClientFIO;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 ManufactureId = order.ManufactureId,
+                ClientId = order.ClientId,
+                ClientFIO = clientFIO,
                 ManufactureName = manufactureName,
                 Count = order.Count,
                 Sum = order.Sum,

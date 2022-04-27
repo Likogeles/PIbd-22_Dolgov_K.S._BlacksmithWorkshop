@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AbstractForgeDatabaseImplement
 {
-    public class BlacksmithWorkshopDatabase : DbContext
+    public class AbstractForgeDatabase : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -17,5 +17,6 @@ namespace AbstractForgeDatabaseImplement
         public virtual DbSet<Manufacture> Manufactures { set; get; }
         public virtual DbSet<ManufactureComponent> ManufactureComponents { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }

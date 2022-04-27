@@ -25,8 +25,7 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             }
             if (model.Id.HasValue)
             {
-                return new List<OrderViewModel> { _orderStorage.GetElement(model)
-};
+                return new List<OrderViewModel> { _orderStorage.GetElement(model) };
             }
             return _orderStorage.GetFilteredList(model);
         }

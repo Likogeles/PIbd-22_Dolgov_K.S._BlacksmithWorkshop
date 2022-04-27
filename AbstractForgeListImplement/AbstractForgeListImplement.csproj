@@ -9,7 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AbstractForgeContracts\BlacksmithWorkshopContracts.csproj" />
+    <ProjectReference Include="..\AbstractForgeContracts\AbstractForgeContracts.csproj" />
+    <ProjectReference Include="..\AbstractForgeFileImplement\AbstractForgeFileImplement\AbstractForgeFileImplement.csproj" />
   </ItemGroup>
 
 </Project>
