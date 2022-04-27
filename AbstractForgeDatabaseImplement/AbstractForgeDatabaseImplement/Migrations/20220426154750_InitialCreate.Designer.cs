@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbstractForgeDatabaseImplement.Migrations
 {
-    [DbContext(typeof(AbstractForgeDatabase))]
+    [DbContext(typeof(BlacksmithWorkshopDatabase))]
     [Migration("20220426154750_InitialCreate")]
     partial class InitialCreate
     {

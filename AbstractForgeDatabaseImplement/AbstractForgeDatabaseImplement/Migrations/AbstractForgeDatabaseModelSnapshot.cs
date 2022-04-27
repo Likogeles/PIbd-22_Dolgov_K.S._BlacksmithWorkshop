@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbstractForgeDatabaseImplement.Migrations
 {
-    [DbContext(typeof(AbstractForgeDatabase))]
+    [DbContext(typeof(BlacksmithWorkshopDatabase))]
     partial class AbstractForgeDatabaseModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

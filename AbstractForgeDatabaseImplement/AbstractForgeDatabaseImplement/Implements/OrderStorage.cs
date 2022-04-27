@@ -13,7 +13,7 @@ namespace AbstractForgeDatabaseImplement.Implements
     {
         public List<OrderViewModel> GetFullList()
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             return context.Orders.Select(CreateModel).ToList();
         }
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model) {
@@ -21,7 +21,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             {
                 return null;
             }
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             //return context.Orders.Where(rec => rec.Status == model.Status).Select(CreateModel).ToList();
             return context.Orders
             .Include(rec => rec.Manufacture)
@@ -35,12 +35,12 @@ namespace AbstractForgeDatabaseImplement.Implements
             {
                 return null;
             }
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             var order = context.Orders.FirstOrDefault(rec => rec.Status == model.Status || rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
         public void Insert(OrderBindingModel model) {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             using var transaction = context.Database.BeginTransaction();
             int maxId = context.Orders.Count() > 0 ? context.Components.Max(rec => rec.Id) : 0;
             
@@ -58,7 +58,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             }
         }
         public void Update(OrderBindingModel model) {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             using var transaction = context.Database.BeginTransaction();
             try
             {
@@ -78,7 +78,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             }
         }
         public void Delete(OrderBindingModel model) {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             Order element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
@@ -103,7 +103,7 @@ namespace AbstractForgeDatabaseImplement.Implements
         }
         private OrderViewModel CreateModel(Order order)
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             string manufactureName = null;
             foreach (var document in context.Manufactures)
             {

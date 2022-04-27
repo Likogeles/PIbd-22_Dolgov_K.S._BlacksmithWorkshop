@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\AbstractForgeContracts\AbstractForgeContracts.csproj" />
+    <ProjectReference Include="..\..\AbstractForgeContracts\BlacksmithWorkshopContracts.csproj" />
   </ItemGroup>
 
 </Project>

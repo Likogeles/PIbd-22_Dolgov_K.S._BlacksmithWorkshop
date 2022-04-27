@@ -12,7 +12,7 @@ namespace AbstractForgeDatabaseImplement.Implements
     {
         public List<ComponentViewModel> GetFullList()
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             return context.Components
             .Select(CreateModel)
             .ToList();
@@ -23,7 +23,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             {
                 return null;
             }
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             return context.Components
             .Where(rec => rec.ComponentName.Contains(model.ComponentName))
             .Select(CreateModel)
@@ -35,7 +35,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             {
                 return null;
             }
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             var component = context.Components
             .FirstOrDefault(rec => rec.ComponentName == model.ComponentName || rec.Id
            == model.Id);
@@ -43,13 +43,13 @@ namespace AbstractForgeDatabaseImplement.Implements
         }
         public void Insert(ComponentBindingModel model)
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             context.Components.Add(CreateModel(model, new Component()));
             context.SaveChanges();
         }
         public void Update(ComponentBindingModel model)
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             var element = context.Components.FirstOrDefault(rec => rec.Id == model.Id);
             if (element == null)
             {
@@ -60,7 +60,7 @@ namespace AbstractForgeDatabaseImplement.Implements
         }
         public void Delete(ComponentBindingModel model)
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             Component element = context.Components.FirstOrDefault(rec => rec.Id ==
            model.Id);
             if (element != null)

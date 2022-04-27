@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractForgeView", "AbstractForgeView\AbstractForgeView.csproj", "{3D556B71-29E6-4E83-8860-60E0A55AFAF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlacksmithWorkshopView", "AbstractForgeView\BlacksmithWorkshopView.csproj", "{3D556B71-29E6-4E83-8860-60E0A55AFAF8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractForgeBusinessLogic", "..\AbstractForgeBusinessLogic\AbstractForgeBusinessLogic.csproj", "{EA16D225-27F6-43A0-85B8-D0E8916F7CFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlacksmithWorkshopBusinessLogic", "..\AbstractForgeBusinessLogic\BlacksmithWorkshopBusinessLogic.csproj", "{EA16D225-27F6-43A0-85B8-D0E8916F7CFD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractForgeListImplement", "..\AbstractForgeListImplement\AbstractForgeListImplement.csproj", "{688C07C8-6D0A-4395-9915-A6DF9B3435A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlacksmithWorkshopListImplement", "..\AbstractForgeListImplement\BlacksmithWorkshopListImplement.csproj", "{688C07C8-6D0A-4395-9915-A6DF9B3435A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractForgeContracts", "..\AbstractForgeContracts\AbstractForgeContracts.csproj", "{BFD6182C-332C-40CB-901F-CEB447C28C55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlacksmithWorkshopContracts", "..\AbstractForgeContracts\BlacksmithWorkshopContracts.csproj", "{BFD6182C-332C-40CB-901F-CEB447C28C55}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractForgeFileImplement", "..\AbstractForgeFileImplement\AbstractForgeFileImplement\AbstractForgeFileImplement.csproj", "{AB9C3AFB-4C80-4B94-81AF-CB5A1C838C49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlacksmithWorkshopFileImplement", "..\AbstractForgeFileImplement\AbstractForgeFileImplement\BlacksmithWorkshopFileImplement.csproj", "{AB9C3AFB-4C80-4B94-81AF-CB5A1C838C49}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractForgeDatabaseImplement", "..\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement.csproj", "{CFB5F7BB-E4D0-41A6-8FB0-1E50518A18E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlacksmithWorkshopDatabaseImplement", "..\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement\BlacksmithWorkshopDatabaseImplement.csproj", "{CFB5F7BB-E4D0-41A6-8FB0-1E50518A18E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

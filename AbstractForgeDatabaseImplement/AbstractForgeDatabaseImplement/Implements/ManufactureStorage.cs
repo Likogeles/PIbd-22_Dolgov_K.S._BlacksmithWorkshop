@@ -13,7 +13,7 @@ namespace AbstractForgeDatabaseImplement.Implements
     {
         public List<ManufactureViewModel> GetFullList()
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             return context.Manufactures
             .Include(rec => rec.ManufactureComponents)
             .ThenInclude(rec => rec.Component)
@@ -27,7 +27,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             {
                 return null;
             }
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             return context.Manufactures
             .Include(rec => rec.ManufactureComponents)
             .ThenInclude(rec => rec.Component)
@@ -42,7 +42,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             {
                 return null;
             }
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             var manufacture = context.Manufactures
             .Include(rec => rec.ManufactureComponents)
             .ThenInclude(rec => rec.Component)
@@ -52,7 +52,7 @@ namespace AbstractForgeDatabaseImplement.Implements
         }
         public void Insert(ManufactureBindingModel model)
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             using var transaction = context.Database.BeginTransaction();
 
             try
@@ -74,7 +74,7 @@ namespace AbstractForgeDatabaseImplement.Implements
         }
         public void Update(ManufactureBindingModel model)
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             using var transaction = context.Database.BeginTransaction();
             try
             {
@@ -96,7 +96,7 @@ namespace AbstractForgeDatabaseImplement.Implements
         }
         public void Delete(ManufactureBindingModel model)
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             Manufacture element = context.Manufactures.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
@@ -109,7 +109,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             }
         }
         private static Manufacture CreateModel(ManufactureBindingModel model, Manufacture manufacture,
-       AbstractForgeDatabase context)
+       BlacksmithWorkshopDatabase context)
         {
             manufacture.ManufactureName = model.ManufactureName;
             manufacture.Price = model.Price;
