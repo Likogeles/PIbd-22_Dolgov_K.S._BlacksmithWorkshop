@@ -119,7 +119,7 @@ namespace AbstractForgeView
         {
             LoadData();
         }
-        private void ComponentsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ManufacturesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
             if (dialog.ShowDialog() == DialogResult.OK)

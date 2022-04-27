@@ -89,7 +89,7 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             _saveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент",
+                Title = "Список изделий",
                 Manufactures = _manufactureStorage.GetFullList()
             });
         }

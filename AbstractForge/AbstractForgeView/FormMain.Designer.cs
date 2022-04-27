@@ -163,8 +163,8 @@ namespace AbstractForgeView
             // 
             this.ComponentsToolStripMenuItem.Name = "ComponentsToolStripMenuItem";
             this.ComponentsToolStripMenuItem.Size = new System.Drawing.Size(276, 26);
-            this.ComponentsToolStripMenuItem.Text = "Список компонентов";
-            this.ComponentsToolStripMenuItem.Click += new System.EventHandler(this.ComponentsToolStripMenuItem_Click);
+            this.ComponentsToolStripMenuItem.Text = "Список изделий";
+            this.ComponentsToolStripMenuItem.Click += new System.EventHandler(this.ManufacturesToolStripMenuItem_Click);
             // 
             // ComponentManufacturesToolStripMenuItem
             // 
