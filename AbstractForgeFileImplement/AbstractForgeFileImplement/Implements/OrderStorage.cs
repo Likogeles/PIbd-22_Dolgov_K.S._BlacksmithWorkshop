@@ -28,7 +28,6 @@ namespace AbstractForgeFileImplement.Implements
             {
                 return null;
             }
-            //return source.Orders.Where(rec => rec.Status == model.Status).Select(CreateModel).ToList();
             return source.Orders
             .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue
                 && rec.DateCreate.Date == model.DateCreate.Date) ||
