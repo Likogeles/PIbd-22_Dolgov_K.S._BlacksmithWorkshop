@@ -34,7 +34,7 @@ namespace AbstractForgeRestApi
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title =
-                "AbstractShopRestApi",
+                "AbstractForgeRestApi",
                     Version = "v1"
                 });
             });
@@ -47,7 +47,7 @@ namespace AbstractForgeRestApi
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AbstractShopRestApi v1"));
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AbstractForgeRestApi v1"));
             }
             app.UseHttpsRedirection();
             app.UseRouting();

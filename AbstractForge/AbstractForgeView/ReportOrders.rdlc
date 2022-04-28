@@ -39,7 +39,7 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>AbstractForgeShopContracts.ViewModels</rd:DataSetName>
+        <rd:DataSetName>AbstractForgeContracts.ViewModels</rd:DataSetName>
         <rd:TableName>ReportOrderViewModel</rd:TableName>
         <rd:ObjectDataSourceType>AbstractForgeContracts.ViewModels.ReportOrderViewModel, AbstractForgeContracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>

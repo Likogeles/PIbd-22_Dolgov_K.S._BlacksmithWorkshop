@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractForgeFileImplement"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractForgeDatabaseImplement", "..\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement.csproj", "{CFB5F7BB-E4D0-41A6-8FB0-1E50518A18E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractForgeRestApi", "..\AbstractForgeRestApi\AbstractForgeRestApi.csproj", "{42FC506D-8FF1-4FB7-9655-4EC76056C8F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractForgeRestApi", "..\AbstractForgeRestApi\AbstractForgeRestApi.csproj", "{42FC506D-8FF1-4FB7-9655-4EC76056C8F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractForgeClientApp", "..\AbstractForgeClientApp\AbstractForgeClientApp.csproj", "{D788D2B3-9867-4E06-8F1E-A5386341C2B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{42FC506D-8FF1-4FB7-9655-4EC76056C8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42FC506D-8FF1-4FB7-9655-4EC76056C8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42FC506D-8FF1-4FB7-9655-4EC76056C8F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D788D2B3-9867-4E06-8F1E-A5386341C2B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D788D2B3-9867-4E06-8F1E-A5386341C2B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D788D2B3-9867-4E06-8F1E-A5386341C2B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D788D2B3-9867-4E06-8F1E-A5386341C2B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

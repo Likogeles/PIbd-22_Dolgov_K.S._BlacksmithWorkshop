@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BlacksmithWorkshopRestApi.Controllers
+namespace AbstractForgeRestApi.Controllers
 {
 
     [Route("api/[controller]/[action]")]

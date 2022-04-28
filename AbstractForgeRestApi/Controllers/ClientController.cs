@@ -3,7 +3,7 @@ using AbstractForgeContracts.BusinessLogicsContracts;
 using AbstractForgeContracts.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlacksmithWorkshopRestApi.Controllers
+namespace AbstractForgeRestApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
