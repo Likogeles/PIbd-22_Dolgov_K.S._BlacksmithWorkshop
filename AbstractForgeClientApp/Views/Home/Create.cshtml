@@ -8,7 +8,7 @@ ViewData["Title"] = "Create";
 <div class="row">
 <div class="col-4">Изделие:</div>
 <div class="col-8">
-<select id="manufacture" name="manufacture" class="form-control" aspitems="@(new SelectList(@ViewBag.Manufactures,"Id", "manufactureName"))"></select>
+<select id="manufacture" name="manufacture" class="form-control" asp-items="@(new SelectList(@ViewBag.Manufactures,"Id", "ManufactureName"))"></select>
 </div>
 </div>
 <div class="row">

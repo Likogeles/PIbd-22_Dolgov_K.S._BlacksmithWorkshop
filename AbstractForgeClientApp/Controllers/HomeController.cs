@@ -260,7 +260,14 @@ namespace AbstractForgeClientApp.Controllers
             {
                 return;
             }
-            //прописать запрос
+            APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
+            {
+                Sum = sum,
+                Count = count,
+                ManufactureId = manufacture,
+                ClientId = Program.Client.Id
+            });
+            
             Response.Redirect("Index");
         }
         [HttpPost]
