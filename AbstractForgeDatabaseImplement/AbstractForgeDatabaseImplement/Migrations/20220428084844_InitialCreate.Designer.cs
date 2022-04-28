@@ -4,14 +4,16 @@ using AbstractForgeDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace AbstractForgeDatabaseImplement.Migrations
+namespace BlacksmithWorkshopDatabaseImplement.Migrations
 {
     [DbContext(typeof(BlacksmithWorkshopDatabase))]
-    partial class AbstractForgeDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20220428084844_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

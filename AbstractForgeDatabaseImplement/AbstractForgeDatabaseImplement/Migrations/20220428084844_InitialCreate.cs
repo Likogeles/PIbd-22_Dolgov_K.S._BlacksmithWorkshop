@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AbstractForgeDatabaseImplement.Migrations
+namespace BlacksmithWorkshopDatabaseImplement.Migrations
 {
     public partial class InitialCreate : Migration
     {
