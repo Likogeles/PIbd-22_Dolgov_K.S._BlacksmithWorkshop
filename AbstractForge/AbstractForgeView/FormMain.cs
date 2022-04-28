@@ -142,5 +142,11 @@ namespace AbstractForgeView
             var form = Program.Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
+
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Program.Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
     }
 }

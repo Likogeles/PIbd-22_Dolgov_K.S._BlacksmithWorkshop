@@ -47,6 +47,8 @@ namespace AbstractForgeView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IManufactureStorage, ManufactureStorage>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientStorage, ClientStorage>(new
+            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IComponentLogic, ComponentLogic>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
@@ -54,6 +56,8 @@ namespace AbstractForgeView
             currentContainer.RegisterType<IManufactureLogic, ManufactureLogic>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IReportLogic, ReportLogic>(new
+            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientLogic, ClientLogic>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());

@@ -10,15 +10,16 @@ namespace AbstractForgeView
     {
         private readonly IManufactureLogic _logicM;
         private readonly IOrderLogic _logicO;
-        public FormCreateOrder(IManufactureLogic logicM, IOrderLogic logicO)
+        private readonly IClientLogic _logicC;
+        public FormCreateOrder(IManufactureLogic logicM, IOrderLogic logicO, IClientLogic logicC)
         {
             InitializeComponent();
             _logicM = logicM;
             _logicO = logicO;
+            _logicC = logicC;
         }
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
-            // прописать логику
             List<ManufactureViewModel> list = _logicM.Read(null);
             if (list != null)
             {
@@ -26,6 +27,14 @@ namespace AbstractForgeView
                 comboBoxManufacture.ValueMember = "Id";
                 comboBoxManufacture.DataSource = list;
                 comboBoxManufacture.SelectedItem = null;
+            }
+            List<ClientViewModel> listC = _logicC.Read(null);
+            if (listC != null)
+            {
+                comboBoxClient.DisplayMember = "ClientFIO";
+                comboBoxClient.ValueMember = "Id";
+                comboBoxClient.DataSource = listC;
+                comboBoxClient.SelectedItem = null;
             }
         }
         private void CalcSum()
@@ -36,12 +45,12 @@ namespace AbstractForgeView
                 try
                 {
                     int id = Convert.ToInt32(comboBoxManufacture.SelectedValue);
-                    ManufactureViewModel product = _logicM.Read(new ManufactureBindingModel
+                    ManufactureViewModel manufacture = _logicM.Read(new ManufactureBindingModel
                     {
                         Id = id
                     })?[0];
                     int count = Convert.ToInt32(textBoxCount.Text);
-                    textBoxSum.Text = (count * product?.Price ?? 0).ToString();
+                    textBoxSum.Text = (count * manufacture?.Price ?? 0).ToString();
                 }
                 catch (Exception ex)
                 {
@@ -77,6 +86,7 @@ namespace AbstractForgeView
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
                     ManufactureId = Convert.ToInt32(comboBoxManufacture.SelectedValue),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 });
