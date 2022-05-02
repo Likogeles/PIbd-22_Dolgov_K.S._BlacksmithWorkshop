@@ -7,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\AbstractForgeBusinessLogic\AbstractForgeBusinessLogic.csproj" />
     <ProjectReference Include="..\..\AbstractForgeContracts\AbstractForgeContracts.csproj" />
+    <ProjectReference Include="..\..\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement\AbstractForgeDatabaseImplement.csproj" />
     <ProjectReference Include="..\..\AbstractForgeFileImplement\AbstractForgeFileImplement\AbstractForgeFileImplement.csproj" />
     <ProjectReference Include="..\..\AbstractForgeListImplement\AbstractForgeListImplement.csproj" />
   </ItemGroup>
