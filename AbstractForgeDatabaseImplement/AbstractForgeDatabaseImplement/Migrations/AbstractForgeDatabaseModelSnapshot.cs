@@ -59,6 +59,28 @@ namespace AbstractForgeDatabaseImplement.Migrations
                     b.ToTable("Components");
                 });
 
+            modelBuilder.Entity("AbstractForgeDatabaseImplement.Models.Implementer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImplementerFIO")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PauseTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkingTime")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Implementers");
+                });
+
             modelBuilder.Entity("AbstractForgeDatabaseImplement.Models.Manufacture", b =>
                 {
                     b.Property<int>("Id")
@@ -122,6 +144,9 @@ namespace AbstractForgeDatabaseImplement.Migrations
                     b.Property<DateTime?>("DateImplement")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ImplementerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ManufactureId")
                         .HasColumnType("int");
 
@@ -134,6 +159,8 @@ namespace AbstractForgeDatabaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("ImplementerId");
 
                     b.HasIndex("ManufactureId");
 
@@ -167,6 +194,10 @@ namespace AbstractForgeDatabaseImplement.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AbstractForgeDatabaseImplement.Models.Implementer", "Implementer")
+                        .WithMany("Orders")
+                        .HasForeignKey("ImplementerId");
+
                     b.HasOne("AbstractForgeDatabaseImplement.Models.Manufacture", "Manufacture")
                         .WithMany("Orders")
                         .HasForeignKey("ManufactureId")
@@ -174,6 +205,8 @@ namespace AbstractForgeDatabaseImplement.Migrations
                         .IsRequired();
 
                     b.Navigation("Client");
+
+                    b.Navigation("Implementer");
 
                     b.Navigation("Manufacture");
                 });
@@ -186,6 +219,11 @@ namespace AbstractForgeDatabaseImplement.Migrations
             modelBuilder.Entity("AbstractForgeDatabaseImplement.Models.Component", b =>
                 {
                     b.Navigation("ManufactureComponents");
+                });
+
+            modelBuilder.Entity("AbstractForgeDatabaseImplement.Models.Implementer", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("AbstractForgeDatabaseImplement.Models.Manufacture", b =>
