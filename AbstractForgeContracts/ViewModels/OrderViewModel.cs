@@ -12,6 +12,7 @@ namespace AbstractForgeContracts.ViewModels
         public int Id { get; set; }
         public int ManufactureId { get; set; }
         public int ClientId { get; set; }
+        public int? ImplementerId { get; set; }
 
         [DisplayName("Клиент")]
         public string ClientFIO { get; set; }
@@ -24,6 +25,8 @@ namespace AbstractForgeContracts.ViewModels
         public decimal Sum { get; set; }
         [DisplayName("Статус")]
         public string Status { get; set; }
+        [DisplayName("Исполнитель")]
+        public string ImplementerFIO { get; set; }
         [DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }
         [DisplayName("Дата выполнения")]

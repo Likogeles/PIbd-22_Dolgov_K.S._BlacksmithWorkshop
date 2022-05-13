@@ -11,12 +11,12 @@ namespace AbstractForgeListImplement.Implements
     public class OrderStorage : IOrderStorage
     {
         private readonly DataListSingleton source;
-        
+
         public OrderStorage()
         {
             source = DataListSingleton.GetInstance();
         }
-        
+
         public List<OrderViewModel> GetFullList()
         {
             var result = new List<OrderViewModel>();
@@ -26,7 +26,7 @@ namespace AbstractForgeListImplement.Implements
             }
             return result;
         }
-        
+
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
         {
             if (model == null)
@@ -53,7 +53,7 @@ namespace AbstractForgeListImplement.Implements
             return result;
 
         }
-        
+
         public OrderViewModel GetElement(OrderBindingModel model)
         {
             if (model == null)
@@ -69,7 +69,7 @@ namespace AbstractForgeListImplement.Implements
             }
             return null;
         }
-        
+
         public void Insert(OrderBindingModel model)
         {
             var tempOrder = new Order { Id = 1 };
@@ -82,7 +82,7 @@ namespace AbstractForgeListImplement.Implements
             }
             source.Orders.Add(CreateModel(model, tempOrder));
         }
-        
+
         public void Update(OrderBindingModel model)
         {
             Order tempOrder = null;
@@ -99,7 +99,7 @@ namespace AbstractForgeListImplement.Implements
             }
             CreateModel(model, tempOrder);
         }
-        
+
         public void Delete(OrderBindingModel model)
         {
             for (int i = 0; i < source.Orders.Count; ++i)
@@ -117,6 +117,7 @@ namespace AbstractForgeListImplement.Implements
         {
             order.ManufactureId = model.ManufactureId;
             order.ClientId = (int)model.ClientId;
+            order.ImplementerId = (int)model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -144,12 +145,23 @@ namespace AbstractForgeListImplement.Implements
                     break;
                 }
             }
+            string implementerFIO = null;
+            foreach (Implementer implementer in source.Implementers)
+            {
+                if (order.ImplementerId == implementer.Id)
+                {
+                    implementerFIO = implementer.ImplementerFIO;
+                    break;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 ManufactureId = order.ManufactureId,
                 ClientId = order.ClientId,
                 ClientFIO = clientFIO,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = implementerFIO,
                 ManufactureName = manufactureName,
                 Count = order.Count,
                 Sum = order.Sum,

@@ -57,6 +57,8 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId=order.ClientId,
+                ImplementerId = model.ImplementerId,
                 ManufactureId = order.ManufactureId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -80,6 +82,8 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 ManufactureId = order.ManufactureId,
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -102,6 +106,8 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 ManufactureId = order.ManufactureId,
+                ClientId = order.ClientId,
+                ImplementerId = model.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
