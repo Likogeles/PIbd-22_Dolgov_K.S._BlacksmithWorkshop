@@ -5,16 +5,20 @@ using AbstractForgeContracts.StoragesContracts;
 using AbstractForgeContracts.ViewModels;
 using System;
 using System.Collections.Generic;
+using AbstractForgeBusinessLogic.MailWorker;
 
 namespace AbstractForgeBusinessLogic.BusinessLogics
 {
     public class OrderLogic : IOrderLogic
     {
         private readonly IOrderStorage _orderStorage;
-
-        public OrderLogic(IOrderStorage orderStorage)
+        private readonly IClientStorage _clientStorage;
+        private readonly AbstractMailWorker _abstractMailWorker;
+        public OrderLogic(IOrderStorage orderStorage, IClientStorage clientStorage, AbstractMailWorker abstractMailWorker)
         {
             _orderStorage = orderStorage;
+            _clientStorage = clientStorage;
+            _abstractMailWorker = abstractMailWorker;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -41,6 +45,15 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
                 Status = OrderStatus.Принят,
                 DateCreate = DateTime.Now
             });
+            _abstractMailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = model.ClientId
+                })?.Email,
+                Subject = $"Новый заказ",
+                Text = $"Заказ от {DateTime.Now} на сумму {model.Sum:N2} принят."
+            });
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
@@ -57,7 +70,7 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
-                ClientId=order.ClientId,
+                ClientId = order.ClientId,
                 ImplementerId = model.ImplementerId,
                 ManufactureId = order.ManufactureId,
                 Count = order.Count,
@@ -65,6 +78,16 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 Status = OrderStatus.Выполняется,
                 DateImplement = DateTime.Now
+            });
+
+            _abstractMailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} передан в работу."
             });
         }
         public void FinishOrder(ChangeStatusBindingModel model)
@@ -90,6 +113,15 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
                 Status = OrderStatus.Готов,
                 DateImplement = order.DateImplement
             });
+            _abstractMailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} готов."
+            });
         }
         public void DeliveryOrder(ChangeStatusBindingModel model)
         {
@@ -113,6 +145,15 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 Status = OrderStatus.Выдан,
                 DateImplement = order.DateImplement
+            });
+            _abstractMailWorker.MailSendAsync(new MailSendInfoBindingModel
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} выдан."
             });
         }
     }

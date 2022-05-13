@@ -65,6 +65,28 @@ namespace AbstractForgeDatabaseImplement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MessagesInfo",
+                columns: table => new
+                {
+                    MessageId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: true),
+                    SenderName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateDelivery = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Body = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MessagesInfo", x => x.MessageId);
+                    table.ForeignKey(
+                        name: "FK_MessagesInfo_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ManufactureComponents",
                 columns: table => new
                 {
@@ -140,6 +162,11 @@ namespace AbstractForgeDatabaseImplement.Migrations
                 column: "ManufactureId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MessagesInfo_ClientId",
+                table: "MessagesInfo",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_ClientId",
                 table: "Orders",
                 column: "ClientId");
@@ -159,6 +186,9 @@ namespace AbstractForgeDatabaseImplement.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ManufactureComponents");
+
+            migrationBuilder.DropTable(
+                name: "MessagesInfo");
 
             migrationBuilder.DropTable(
                 name: "Orders");

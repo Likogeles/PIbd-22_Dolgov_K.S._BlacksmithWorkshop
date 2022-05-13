@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbstractForgeDatabaseImplement.Migrations
 {
     [DbContext(typeof(AbstractForgeDatabase))]
-    [Migration("20220513165153_InitialCreate")]
+    [Migration("20220513224436_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,6 +127,33 @@ namespace AbstractForgeDatabaseImplement.Migrations
                     b.ToTable("ManufactureComponents");
                 });
 
+            modelBuilder.Entity("AbstractForgeDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.Property<string>("MessageId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateDelivery")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SenderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("MessagesInfo");
+                });
+
             modelBuilder.Entity("AbstractForgeDatabaseImplement.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -188,6 +215,15 @@ namespace AbstractForgeDatabaseImplement.Migrations
                     b.Navigation("Manufacture");
                 });
 
+            modelBuilder.Entity("AbstractForgeDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.HasOne("AbstractForgeDatabaseImplement.Models.Client", "Client")
+                        .WithMany("MessagesInfo")
+                        .HasForeignKey("ClientId");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("AbstractForgeDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("AbstractForgeDatabaseImplement.Models.Client", "Client")
@@ -215,6 +251,8 @@ namespace AbstractForgeDatabaseImplement.Migrations
 
             modelBuilder.Entity("AbstractForgeDatabaseImplement.Models.Client", b =>
                 {
+                    b.Navigation("MessagesInfo");
+
                     b.Navigation("Orders");
                 });
 

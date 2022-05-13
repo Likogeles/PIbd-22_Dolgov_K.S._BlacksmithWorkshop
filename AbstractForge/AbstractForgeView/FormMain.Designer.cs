@@ -44,6 +44,7 @@ namespace AbstractForgeView
             this.ComponentManufacturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.запускРаботToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.вывестиПисьмаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -98,7 +99,8 @@ namespace AbstractForgeView
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникиToolStripMenuItem,
             this.отчётыToolStripMenuItem,
-            this.запускРаботToolStripMenuItem});
+            this.запускРаботToolStripMenuItem,
+            this.вывестиПисьмаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
@@ -183,6 +185,13 @@ namespace AbstractForgeView
             this.запускРаботToolStripMenuItem.Text = "Запуск работ";
             this.запускРаботToolStripMenuItem.Click += new System.EventHandler(this.запускРаботToolStripMenuItem_Click);
             // 
+            // вывестиПисьмаToolStripMenuItem
+            // 
+            this.вывестиПисьмаToolStripMenuItem.Name = "вывестиПисьмаToolStripMenuItem";
+            this.вывестиПисьмаToolStripMenuItem.Size = new System.Drawing.Size(137, 24);
+            this.вывестиПисьмаToolStripMenuItem.Text = "Вывести письма";
+            this.вывестиПисьмаToolStripMenuItem.Click += new System.EventHandler(this.вывестиПисьмаToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -223,5 +232,6 @@ namespace AbstractForgeView
         private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запускРаботToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem вывестиПисьмаToolStripMenuItem;
     }
 }

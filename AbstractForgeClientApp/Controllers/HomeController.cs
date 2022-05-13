@@ -141,6 +141,11 @@ namespace AbstractForgeClientApp.Controllers
             APIClient.GetRequest<ManufactureViewModel>($"api/main/getmanufacture?manufactureId={manufacture}");
             return count * prod.Price;
         }
-
+        [HttpGet]
+        public IActionResult MessageInfo()
+        {
+            ViewBag.MessagesInfo = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/GetClientsMessagesInfo?clientId={Program.Client.Id}");
+            return View();
+        }
     }
 }
