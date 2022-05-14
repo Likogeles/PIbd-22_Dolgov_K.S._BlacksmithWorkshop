@@ -92,7 +92,7 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
         }
         public void FinishOrder(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId, ImplementerId = model.ImplementerId }) ;
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
@@ -106,7 +106,7 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
                 Id = order.Id,
                 ManufactureId = order.ManufactureId,
                 ClientId = order.ClientId,
-                ImplementerId = model.ImplementerId,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -125,7 +125,7 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
         }
         public void DeliveryOrder(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+            var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId, ImplementerId = model.ImplementerId });
             if (order == null)
             {
                 throw new Exception("Заказ не найден");
@@ -139,7 +139,7 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
                 Id = order.Id,
                 ManufactureId = order.ManufactureId,
                 ClientId = order.ClientId,
-                ImplementerId = model.ImplementerId,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
