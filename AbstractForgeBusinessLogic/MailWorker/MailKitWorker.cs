@@ -1,5 +1,6 @@
 ﻿using AbstractForgeContracts.BindingModels;
 using AbstractForgeContracts.BusinessLogicsContracts;
+using AbstractForgeContracts.StoragesContracts;
 using MailKit.Net.Pop3;
 using MailKit.Security;
 using System;
@@ -14,9 +15,10 @@ namespace AbstractForgeBusinessLogic.MailWorker
 {
     public class MailKitWorker : AbstractMailWorker
     {
-        public MailKitWorker(IMessageInfoLogic messageInfoLogic) :
-        base(messageInfoLogic)
+        private IClientStorage _clientStorage;
+        public MailKitWorker(IMessageInfoLogic messageInfoLogic, IClientStorage clientStorage) : base(messageInfoLogic)
         {
+            _clientStorage = clientStorage;
         }
         protected override async Task SendMailAsync(MailSendInfoBindingModel info)
         {
@@ -61,8 +63,8 @@ namespace AbstractForgeBusinessLogic.MailWorker
                         {
                             list.Add(new MessageInfoBindingModel
                             {
-                                DateDelivery =
-                            message.Date.DateTime,
+                                ClientId = _clientStorage.GetElement(new ClientBindingModel { Email = mail.Address })?.Id,
+                                DateDelivery = message.Date.DateTime,
                                 MessageId = message.MessageId,
                                 FromMailAddress = mail.Address,
                                 Subject = message.Subject,
