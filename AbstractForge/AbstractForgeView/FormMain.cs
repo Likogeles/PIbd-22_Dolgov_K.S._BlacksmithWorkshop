@@ -4,6 +4,8 @@ using System;
 using System.Windows.Forms;
 using Unity;
 
+// Конкурирующая коллекция, что где зачем
+
 namespace AbstractForgeView
 {
     public partial class FormMain : Form

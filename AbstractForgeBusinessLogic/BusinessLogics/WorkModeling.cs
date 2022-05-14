@@ -20,18 +20,15 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
         /// <summary>
         /// Запуск работ
         /// </summary>
-        public void DoWork(IImplementerLogic implementerLogic, IOrderLogic
-        orderLogic)
+        public void DoWork(IImplementerLogic implementerLogic, IOrderLogic orderLogic)
         {
             _orderLogic = orderLogic;
             var implementers = implementerLogic.Read(null);
-            ConcurrentBag<OrderViewModel> orders = new(_orderLogic.Read(new
-            OrderBindingModel
+            ConcurrentBag<OrderViewModel> orders = new(_orderLogic.Read(new OrderBindingModel
             { SearchStatus = OrderStatus.Принят }));
             foreach (var implementer in implementers)
             {
-                Task.Run(async () => await WorkerWorkAsync(implementer,
-                orders));
+                Task.Run(async () => await WorkerWorkAsync(implementer, orders));
             }
         }
         /// <summary>
@@ -43,8 +40,7 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
         ConcurrentBag<OrderViewModel> orders)
         {
             // ищем заказы, которые уже в работе (вдруг исполнителя прервали)
-            var runOrders = await Task.Run(() => _orderLogic.Read(new
-            OrderBindingModel
+            var runOrders = await Task.Run(() => _orderLogic.Read(new OrderBindingModel
             {
                 ImplementerId = implementer.Id,
                 Status = OrderStatus.Выполняется
@@ -52,12 +48,10 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             foreach (var order in runOrders)
             {
                 // делаем работу заново
-                Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) *
-                order.Count);
+                Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
                 _orderLogic.FinishOrder(new ChangeStatusBindingModel
                 {
-                    OrderId
-                = order.Id
+                    OrderId = order.Id
                 });
                 // отдыхаем
                 Thread.Sleep(implementer.PauseTime);
@@ -69,15 +63,10 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
                     if (orders.TryTake(out OrderViewModel order))
                     {
                         // пытаемся назначить заказ на исполнителя
-                        _orderLogic.TakeOrderInWork(new
-                        ChangeStatusBindingModel
-                        { OrderId = order.Id, ImplementerId = implementer.Id });
+                        _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = order.Id, ImplementerId = implementer.Id });
                         // делаем работу
-                        Thread.Sleep(implementer.WorkingTime *
-                        rnd.Next(1, 5) * order.Count);
-                        _orderLogic.FinishOrder(new
-                        ChangeStatusBindingModel
-                        { OrderId = order.Id });
+                        Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                        _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id });
                         // отдыхаем
                         Thread.Sleep(implementer.PauseTime);
                     }
