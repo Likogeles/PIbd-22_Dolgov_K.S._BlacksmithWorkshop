@@ -28,10 +28,11 @@ namespace AbstractForgeFileImplement.Implements
             {
                 return null;
             }
-            //return source.Orders.Where(rec => rec.Status == model.Status).Select(CreateModel).ToList();
             return source.Orders
-            .Where(rec => rec.Id.Equals(model.Id) || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-            .ToList()
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue
+                && rec.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId))
             .Select(CreateModel)
             .ToList();
         }
@@ -89,6 +90,7 @@ namespace AbstractForgeFileImplement.Implements
         private static Order CreateModel(OrderBindingModel model, Order order)
         {
             order.ManufactureId = model.ManufactureId;
+            order.ClientId = (int)model.ClientId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -112,6 +114,8 @@ namespace AbstractForgeFileImplement.Implements
             return new OrderViewModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
+                ClientFIO = source.Clients.FirstOrDefault(clientFIO => clientFIO.Id == order.ClientId)?.ClientFIO,
                 ManufactureId = order.ManufactureId,
                 Count = order.Count,
                 Sum = order.Sum,

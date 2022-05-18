@@ -13,19 +13,27 @@ namespace AbstractForgeDatabaseImplement.Implements
     {
         public List<OrderViewModel> GetFullList()
         {
-            using var context = new BlacksmithWorkshopDatabase();
-            return context.Orders.Select(CreateModel).ToList();
+            using var context = new AbstractForgeDatabase();
+            return context.Orders
+                .Include(rec => rec.Manufacture)
+                .Include(rec => rec.Client)
+                .Select(CreateModel)
+                .ToList();
         }
-        public List<OrderViewModel> GetFilteredList(OrderBindingModel model) {
+        public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
+        {
             if (model == null)
             {
                 return null;
             }
-            using var context = new BlacksmithWorkshopDatabase();
-            //return context.Orders.Where(rec => rec.Status == model.Status).Select(CreateModel).ToList();
+            using var context = new AbstractForgeDatabase();
+
             return context.Orders
             .Include(rec => rec.Manufacture)
-            .Where(rec => rec.Id.Equals(model.Id) || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+            .Include(rec => rec.Client)
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -35,12 +43,15 @@ namespace AbstractForgeDatabaseImplement.Implements
             {
                 return null;
             }
-            using var context = new BlacksmithWorkshopDatabase();
-            var order = context.Orders.FirstOrDefault(rec => rec.Status == model.Status || rec.Id == model.Id);
+            using var context = new AbstractForgeDatabase();
+            var order = context.Orders
+            .Include(rec => rec.Manufacture)
+            .Include(rec => rec.Client)
+            .FirstOrDefault(rec => rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
         public void Insert(OrderBindingModel model) {
-            using var context = new BlacksmithWorkshopDatabase();
+            using var context = new AbstractForgeDatabase();
             using var transaction = context.Database.BeginTransaction();
             int maxId = context.Orders.Count() > 0 ? context.Components.Max(rec => rec.Id) : 0;
             
@@ -58,7 +69,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             }
         }
         public void Update(OrderBindingModel model) {
-            using var context = new BlacksmithWorkshopDatabase();
+            using var context = new AbstractForgeDatabase();
             using var transaction = context.Database.BeginTransaction();
             try
             {
@@ -78,7 +89,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             }
         }
         public void Delete(OrderBindingModel model) {
-            using var context = new BlacksmithWorkshopDatabase();
+            using var context = new AbstractForgeDatabase();
             Order element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
@@ -93,6 +104,7 @@ namespace AbstractForgeDatabaseImplement.Implements
         private static Order CreateModel(OrderBindingModel model, Order order)
         {
             order.ManufactureId = model.ManufactureId;
+            order.ClientId = (int)model.ClientId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -103,7 +115,7 @@ namespace AbstractForgeDatabaseImplement.Implements
         }
         private OrderViewModel CreateModel(Order order)
         {
-            using var context = new BlacksmithWorkshopDatabase();
+            using var context = new AbstractForgeDatabase();
             string manufactureName = null;
             foreach (var document in context.Manufactures)
             {
@@ -117,6 +129,8 @@ namespace AbstractForgeDatabaseImplement.Implements
             {
                 Id = order.Id,
                 ManufactureId = order.ManufactureId,
+                ClientId = order.ClientId,
+                ClientFIO = order.Client.ClientFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status.ToString(),

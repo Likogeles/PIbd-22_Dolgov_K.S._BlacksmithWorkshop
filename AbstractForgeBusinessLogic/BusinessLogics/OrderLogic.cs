@@ -25,8 +25,7 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             }
             if (model.Id.HasValue)
             {
-                return new List<OrderViewModel> { _orderStorage.GetElement(model)
-};
+                return new List<OrderViewModel> { _orderStorage.GetElement(model) };
             }
             return _orderStorage.GetFilteredList(model);
         }
@@ -36,6 +35,7 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
             _orderStorage.Insert(new OrderBindingModel
             {
                 ManufactureId = model.ManufactureId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
                 Status = OrderStatus.Принят,

@@ -11,6 +11,11 @@ namespace AbstractForgeContracts.ViewModels
 
         public int Id { get; set; }
         public int ManufactureId { get; set; }
+        public int ClientId { get; set; }
+
+        [DisplayName("Клиент")]
+        public string ClientFIO { get; set; }
+
         [DisplayName("Изделие")]
         public string ManufactureName { get; set; }
         [DisplayName("Количество")]

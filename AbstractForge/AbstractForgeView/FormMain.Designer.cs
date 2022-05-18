@@ -43,6 +43,7 @@ namespace AbstractForgeView
             this.ComponentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ComponentManufacturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -130,7 +131,8 @@ namespace AbstractForgeView
             // 
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.изделияToolStripMenuItem,
-            this.изделияToolStripMenuItem1});
+            this.изделияToolStripMenuItem1,
+            this.клиентыToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(117, 24);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -138,14 +140,14 @@ namespace AbstractForgeView
             // изделияToolStripMenuItem
             // 
             this.изделияToolStripMenuItem.Name = "изделияToolStripMenuItem";
-            this.изделияToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.изделияToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.изделияToolStripMenuItem.Text = "Компоненты";
             this.изделияToolStripMenuItem.Click += new System.EventHandler(this.КомпонентыToolStripMenuItem_Click);
             // 
             // изделияToolStripMenuItem1
             // 
             this.изделияToolStripMenuItem1.Name = "изделияToolStripMenuItem1";
-            this.изделияToolStripMenuItem1.Size = new System.Drawing.Size(182, 26);
+            this.изделияToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.изделияToolStripMenuItem1.Text = "Изделия";
             this.изделияToolStripMenuItem1.Click += new System.EventHandler(this.ИзделияToolStripMenuItem_Click);
             // 
@@ -179,6 +181,13 @@ namespace AbstractForgeView
             this.OrdersToolStripMenuItem.Size = new System.Drawing.Size(276, 26);
             this.OrdersToolStripMenuItem.Text = "Список заказов";
             this.OrdersToolStripMenuItem.Click += new System.EventHandler(this.OrdersToolStripMenuItem_Click);
+            // 
+            // клиентыToolStripMenuItem
+            // 
+            this.клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
+            this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.клиентыToolStripMenuItem.Text = "Клиенты";
+            this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -221,5 +230,6 @@ namespace AbstractForgeView
         private System.Windows.Forms.ToolStripMenuItem ComponentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ComponentManufacturesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OrdersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
     }
 }

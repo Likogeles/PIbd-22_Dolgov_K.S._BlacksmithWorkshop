@@ -1,2 +1,2 @@
 SELECT *
-FROM ManufactureComponents
+FROM Manufactures
