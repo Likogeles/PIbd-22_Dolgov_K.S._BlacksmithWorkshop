@@ -131,18 +131,14 @@ namespace AbstractForgeView
                     var fbd = new FolderBrowserDialog();
                     if (fbd.ShowDialog() == DialogResult.OK)
                     {
-                        _backUpLogic.CreateBackUp(new
-                        BackUpSaveBindingModel
-                        { FolderName = fbd.SelectedPath });
-                        MessageBox.Show("Бекап создан", "Сообщение",
-                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        _backUpLogic.CreateBackUp(new BackUpSaveBindingModel { FolderName = fbd.SelectedPath });
+                        MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-               MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
