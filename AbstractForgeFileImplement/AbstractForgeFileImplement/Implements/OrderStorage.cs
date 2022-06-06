@@ -91,6 +91,7 @@ namespace AbstractForgeFileImplement.Implements
         {
             order.ManufactureId = model.ManufactureId;
             order.ClientId = (int)model.ClientId;
+            order.ImplementerId = (int)model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -116,6 +117,8 @@ namespace AbstractForgeFileImplement.Implements
                 Id = order.Id,
                 ClientId = order.ClientId,
                 ClientFIO = source.Clients.FirstOrDefault(clientFIO => clientFIO.Id == order.ClientId)?.ClientFIO,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = source.Implementers.FirstOrDefault(implementerFIO => implementerFIO.Id == order.ImplementerId)?.ImplementerFIO,
                 ManufactureId = order.ManufactureId,
                 Count = order.Count,
                 Sum = order.Sum,

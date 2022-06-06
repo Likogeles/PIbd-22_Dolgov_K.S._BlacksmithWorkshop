@@ -17,6 +17,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             return context.Orders
                 .Include(rec => rec.Manufacture)
                 .Include(rec => rec.Client)
+                .Include(rec => rec.Implementer)
                 .Select(CreateModel)
                 .ToList();
         }
@@ -31,9 +32,11 @@ namespace AbstractForgeDatabaseImplement.Implements
             return context.Orders
             .Include(rec => rec.Manufacture)
             .Include(rec => rec.Client)
+            .Include(rec => rec.Implementer)
             .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
             (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
-            (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId) || (model.SearchStatus.HasValue && model.SearchStatus.Value == rec.Status) ||
+            (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && model.Status == rec.Status))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -47,6 +50,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             var order = context.Orders
             .Include(rec => rec.Manufacture)
             .Include(rec => rec.Client)
+            .Include(rec => rec.Implementer)
             .FirstOrDefault(rec => rec.Id == model.Id);
             return order != null ? CreateModel(order) : null;
         }
@@ -105,6 +109,7 @@ namespace AbstractForgeDatabaseImplement.Implements
         {
             order.ManufactureId = model.ManufactureId;
             order.ClientId = (int)model.ClientId;
+            order.ImplementerId = model.ImplementerId;
             order.Count = model.Count;
             order.Sum = model.Sum;
             order.Status = model.Status;
@@ -131,6 +136,8 @@ namespace AbstractForgeDatabaseImplement.Implements
                 ManufactureId = order.ManufactureId,
                 ClientId = order.ClientId,
                 ClientFIO = order.Client.ClientFIO,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = order.Implementer?.ImplementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status.ToString(),
