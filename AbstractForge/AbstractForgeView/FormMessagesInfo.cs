@@ -22,13 +22,7 @@ namespace AbstractForgeView
         {
             try
             {
-                var list = _messageInfoLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(_messageInfoLogic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {
