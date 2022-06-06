@@ -16,11 +16,13 @@ namespace AbstractForgeFileImplement
         private readonly string ManufactureFileName = "Manufacture.xml";
         private readonly string ClientFileName = "Client.xml";
         private readonly string ImplementerFileName = "Implementer.xml";
+        private readonly string MessageInfoFileName = "MessageInfo.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Manufacture> Manufactures { get; set; }
         public List<Client> Clients { get; set; }
         public List<Implementer> Implementers { get; set; }
+        public List<MessageInfo> MessagesInfo { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
@@ -28,6 +30,7 @@ namespace AbstractForgeFileImplement
             Manufactures = LoadManufactures();
             Clients = LoadClients();
             Implementers = LoadImplementers();
+            MessagesInfo = LoadMessagesInfo();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -44,6 +47,7 @@ namespace AbstractForgeFileImplement
             instance.SaveManufactures();
             instance.SaveClients();
             instance.SaveImplementers();
+            instance.SaveMessagesInfo();
         }
         ~FileDataListSingleton()
         {
@@ -204,7 +208,7 @@ namespace AbstractForgeFileImplement
         {
             if (Manufactures != null)
             {
-                var xElement = new XElement("Products");
+                var xElement = new XElement("Manufactures");
                 foreach (var manufacture in Manufactures)
                 {
                     var compElement = new XElement("ManufactureComponents");
@@ -256,6 +260,50 @@ namespace AbstractForgeFileImplement
                 }
                 var xDocument = new XDocument(xElement);
                 xDocument.Save(ImplementerFileName);
+            }
+        }
+        public List<MessageInfo> LoadMessagesInfo()
+        {
+            var list = new List<MessageInfo>();
+            if (File.Exists(MessageInfoFileName))
+            {
+                var xDocument = XDocument.Load(MessageInfoFileName);
+                var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new MessageInfo
+                    {
+                        MessageId = elem.Attribute("MessageId").Value,
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
+                        SenderName = elem.Element("SenderName").Value,
+                        Subject = elem.Element("Subject").Value,
+                        Body = elem.Element("Body").Value
+                    });
+                    if (elem.Element("DateDelivery").Value != "")
+                    {
+                        list.Last().DateDelivery = DateTime.ParseExact(elem.Element("DateDelivery").Value, "d.M.yyyy H:m:s", null);
+                    }
+                }
+            }
+            return list;
+        }
+        private void SaveMessagesInfo()
+        {
+            if (MessagesInfo != null)
+            {
+                var xElement = new XElement("MessagesInfo");
+                foreach (var messageInfo in MessagesInfo)
+                {
+                    xElement.Add(new XElement("MessageInfo",
+                    new XAttribute("MessageId", messageInfo.MessageId),
+                    new XElement("ClientId", messageInfo.ClientId),
+                    new XElement("SenderName", messageInfo.SenderName),
+                    new XElement("DateDelivery", messageInfo.DateDelivery.ToString()),
+                    new XElement("Subject", messageInfo.Subject),
+                    new XElement("Body", messageInfo.Body)));
+                }
+                var xDocument = new XDocument(xElement);
+                xDocument.Save(OrderFileName);
             }
         }
     }

@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "MessageInfo";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Письма</h1>
+</div>
+
+
+<div class="text-center">
+    @{
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Отправитель
+                    </th>
+                    <th>
+                        Дата письма
+                    </th>
+                    <th>
+                        Заголовк
+                    </th>
+                    <th>
+                        Текст
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.MessagesInfo)
+                {
+                    <tr>
+                        <td>
+                            @item.SenderName
+                        </td>
+                        <td>
+                            @item.DateDelivery
+                        </td>
+                        <td>
+                            @item.Subject
+                        </td>
+                        <td>
+                            @item.Body
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using AbstractForgeContracts.BindingModels;
+﻿using AbstractForgeContracts.BindingModels;
 using AbstractForgeContracts.BusinessLogicsContracts;
 using AbstractForgeContracts.StoragesContracts;
 using AbstractForgeContracts.ViewModels;
-
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 namespace AbstractForgeBusinessLogic.BusinessLogics
 {
     public class ClientLogic : IClientLogic
     {
         private readonly IClientStorage _clientStorage;
+        private readonly int _passwordMaxLength = 50;
+        private readonly int _passwordMinLength = 10;
         public ClientLogic(IClientStorage clientStorage)
         {
             _clientStorage = clientStorage;
@@ -30,11 +32,23 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
         {
             var element = _clientStorage.GetElement(new ClientBindingModel
             {
-                Email = model.Email
+                ClientFIO =
+           model.ClientFIO
             });
             if (element != null && element.Id != model.Id)
             {
-                throw new Exception("Уже есть клиент с таким логином");
+                throw new Exception("Уже есть клиент с таким ФИО");
+            }
+            if (!Regex.IsMatch(model.Email, @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                                            @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$"))
+            {
+                throw new Exception("В качестве логина почта указана должна быть");
+            }
+            if (model.Password.Length > _passwordMaxLength || model.Password.Length <
+           _passwordMinLength || !Regex.IsMatch(model.Password,
+           @"^((\w+\d+\W+)|(\w+\W+\d+)|(\d+\w+\W+)|(\d+\W+\w+)|(\W+\w+\d+)|(\W+\d+\w+))[\w\d\W]*$"))
+            {
+                throw new Exception($"Пароль длиной от {_passwordMinLength} до { _passwordMaxLength } должен быть и из цифр, букв и небуквенных символов должен состоять");
             }
             if (model.Id.HasValue)
             {
@@ -49,11 +63,12 @@ namespace AbstractForgeBusinessLogic.BusinessLogics
         {
             var element = _clientStorage.GetElement(new ClientBindingModel
             {
-                Id = model.Id
+                Id =
+           model.Id
             });
             if (element == null)
             {
-                throw new Exception("Удаляемый элемент не найден");
+                throw new Exception("Элемент не найден");
             }
             _clientStorage.Delete(model);
         }
