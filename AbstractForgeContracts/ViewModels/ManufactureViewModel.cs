@@ -11,11 +11,11 @@ namespace AbstractForgeContracts.ViewModels
     {
         [Column(title: "Номер", width: 80)]
         public int Id { get; set; }
-        [Column(title: "Название изделия", width: 180)]
+        [Column(title: "Название изделия", gridViewAutoSize: GridViewAutoSize.Fill, width: 180)]
         public string ManufactureName { get; set; }
         [Column(title: "Цена", width: 60)]
         public decimal Price { get; set; }
-        [Column(title: "Компоненты", gridViewAutoSize: GridViewAutoSize.Fill)]
+        //[Column(title: "Компоненты", gridViewAutoSize: GridViewAutoSize.Fill)]
         public Dictionary<int, (string, int)> ManufactureComponents { get; set; }
         public string GetComponents()
         {

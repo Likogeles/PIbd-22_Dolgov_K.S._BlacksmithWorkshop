@@ -49,12 +49,8 @@ namespace AbstractForgeDatabaseImplement.Implements
         public void Insert(MessageInfoBindingModel model)
         {
             using var context = new AbstractForgeDatabase();
-            MessageInfo element = context.MessagesInfo.FirstOrDefault(rec =>
-            rec.MessageId == model.MessageId);
-            if (element != null)
-            {
-                throw new Exception("Уже есть письмо с таким идентификатором");
-            }
+            if (context.MessagesInfo.FirstOrDefault(rec => rec.MessageId == model.MessageId) != null) return;
+            if (model.ClientId == null) model.ClientId = context.Clients.FirstOrDefault(rec => rec.Email == model.FromMailAddress).Id;
             context.MessagesInfo.Add(new MessageInfo
             {
                 MessageId = model.MessageId,

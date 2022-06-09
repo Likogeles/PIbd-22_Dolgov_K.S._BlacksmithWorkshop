@@ -36,18 +36,20 @@
             // dataGridView
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView.Location = new System.Drawing.Point(10, 9);
+            this.dataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 29;
-            this.dataGridView.Size = new System.Drawing.Size(610, 423);
+            this.dataGridView.Size = new System.Drawing.Size(861, 317);
             this.dataGridView.TabIndex = 0;
             // 
             // buttonRef
             // 
-            this.buttonRef.Location = new System.Drawing.Point(628, 12);
+            this.buttonRef.Location = new System.Drawing.Point(877, 9);
+            this.buttonRef.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRef.Name = "buttonRef";
-            this.buttonRef.Size = new System.Drawing.Size(96, 50);
+            this.buttonRef.Size = new System.Drawing.Size(84, 38);
             this.buttonRef.TabIndex = 2;
             this.buttonRef.Text = "Обновить список";
             this.buttonRef.UseVisualStyleBackColor = true;
@@ -55,11 +57,12 @@
             // 
             // FormMessagesInfo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(736, 447);
+            this.ClientSize = new System.Drawing.Size(973, 335);
             this.Controls.Add(this.buttonRef);
             this.Controls.Add(this.dataGridView);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormMessagesInfo";
             this.Text = "Письма";
             this.Load += new System.EventHandler(this.FormMessagesInfo_Load);
