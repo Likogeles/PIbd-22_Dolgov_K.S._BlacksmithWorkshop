@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using AbstractForgeContracts.Attributes;
 
 namespace AbstractForgeContracts.ViewModels
 {
@@ -8,11 +9,25 @@ namespace AbstractForgeContracts.ViewModels
     /// </summary>
     public class ManufactureViewModel
     {
+        [Column(title: "Номер", width: 80)]
         public int Id { get; set; }
-        [DisplayName("Название изделия")]
+        [Column(title: "Название изделия", gridViewAutoSize: GridViewAutoSize.Fill, width: 180)]
         public string ManufactureName { get; set; }
-        [DisplayName("Цена")]
+        [Column(title: "Цена", width: 60)]
         public decimal Price { get; set; }
+        //[Column(title: "Компоненты", gridViewAutoSize: GridViewAutoSize.Fill)]
         public Dictionary<int, (string, int)> ManufactureComponents { get; set; }
+        public string GetComponents()
+        {
+            string stringComponents = string.Empty;
+            if (ManufactureComponents != null)
+            {
+                foreach (var component in ManufactureComponents)
+                {
+                    stringComponents += component.Value.Item1 + " = " + component.Value.Item2 + " шт.; ";
+                }
+            }
+            return stringComponents;
+        }
     }
 }

@@ -17,5 +17,4 @@ namespace AbstractForgeDatabaseImplement.Models
         public string Body { get; set; }
         public virtual Client Client { get; set; }
     }
-
 }
