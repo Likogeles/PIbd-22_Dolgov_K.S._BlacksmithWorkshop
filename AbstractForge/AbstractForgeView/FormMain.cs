@@ -32,6 +32,7 @@ namespace AbstractForgeView
             try
             {
                 Program.ConfigGrid(_orderLogic.Read(null), dataGridView);
+
             }
             catch (Exception ex)
             {
