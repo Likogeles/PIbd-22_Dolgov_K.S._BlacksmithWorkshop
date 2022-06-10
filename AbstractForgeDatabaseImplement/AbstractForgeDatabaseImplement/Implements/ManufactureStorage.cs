@@ -13,7 +13,7 @@ namespace AbstractForgeDatabaseImplement.Implements
     {
         public List<ManufactureViewModel> GetFullList()
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             return context.Manufactures
             .Include(rec => rec.ManufactureComponents)
             .ThenInclude(rec => rec.Component)
@@ -27,7 +27,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             {
                 return null;
             }
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             return context.Manufactures
             .Include(rec => rec.ManufactureComponents)
             .ThenInclude(rec => rec.Component)
@@ -42,7 +42,7 @@ namespace AbstractForgeDatabaseImplement.Implements
             {
                 return null;
             }
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             var manufacture = context.Manufactures
             .Include(rec => rec.ManufactureComponents)
             .ThenInclude(rec => rec.Component)
@@ -52,13 +52,18 @@ namespace AbstractForgeDatabaseImplement.Implements
         }
         public void Insert(ManufactureBindingModel model)
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             using var transaction = context.Database.BeginTransaction();
+
             try
             {
-                context.Manufactures.Add(CreateModel(model, new Manufacture(),
-                context));
+                Manufacture manufacture = new Manufacture() {
+                    ManufactureName = model.ManufactureName,
+                    Price = model.Price
+                };
+                context.Manufactures.Add(manufacture);
                 context.SaveChanges();
+                CreateModel(model, manufacture, context);
                 transaction.Commit();
             }
             catch
@@ -69,7 +74,7 @@ namespace AbstractForgeDatabaseImplement.Implements
         }
         public void Update(ManufactureBindingModel model)
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             using var transaction = context.Database.BeginTransaction();
             try
             {
@@ -91,7 +96,7 @@ namespace AbstractForgeDatabaseImplement.Implements
         }
         public void Delete(ManufactureBindingModel model)
         {
-            using var context = new AbstractForgeDatabase();
+            using var context = new BlacksmithWorkshopDatabase();
             Manufacture element = context.Manufactures.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
@@ -104,17 +109,15 @@ namespace AbstractForgeDatabaseImplement.Implements
             }
         }
         private static Manufacture CreateModel(ManufactureBindingModel model, Manufacture manufacture,
-       AbstractForgeDatabase context)
+       BlacksmithWorkshopDatabase context)
         {
             manufacture.ManufactureName = model.ManufactureName;
             manufacture.Price = model.Price;
             if (model.Id.HasValue)
             {
-                var manufactureComponents = context.ManufactureComponents.Where(rec =>
-               rec.ManufactureId == model.Id.Value).ToList();
+                var manufactureComponents = context.ManufactureComponents.Where(rec => rec.ManufactureId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.ManufactureComponents.RemoveRange(manufactureComponents.Where(rec =>
-               !model.ManufactureComponents.ContainsKey(rec.ComponentId)).ToList());
+                context.ManufactureComponents.RemoveRange(manufactureComponents.Where(rec => !model.ManufactureComponents.ContainsKey(rec.ComponentId)).ToList());
                 context.SaveChanges();
                 // обновили количество у существующих записей
                 foreach (var updateComponent in manufactureComponents)

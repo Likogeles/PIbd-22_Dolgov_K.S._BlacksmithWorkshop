@@ -28,7 +28,12 @@ namespace AbstractForgeFileImplement.Implements
             {
                 return null;
             }
-            return source.Orders.Where(rec => rec.Status == model.Status).Select(CreateModel).ToList();
+            //return source.Orders.Where(rec => rec.Status == model.Status).Select(CreateModel).ToList();
+            return source.Orders
+            .Where(rec => rec.Id.Equals(model.Id) || rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+            .ToList()
+            .Select(CreateModel)
+            .ToList();
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)

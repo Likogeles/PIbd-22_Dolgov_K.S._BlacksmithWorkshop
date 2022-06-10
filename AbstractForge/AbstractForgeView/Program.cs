@@ -1,4 +1,6 @@
 using AbstractForgeBusinessLogic.BusinessLogics;
+using AbstractForgeBusinessLogic.OfficePackage;
+using AbstractForgeBusinessLogic.OfficePackage.Implements;
 using AbstractForgeContracts.BusinessLogicsContracts;
 using AbstractForgeContracts.StoragesContracts;
 using AbstractForgeDatabaseImplement.Implements;
@@ -51,6 +53,11 @@ namespace AbstractForgeView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IManufactureLogic, ManufactureLogic>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IReportLogic, ReportLogic>(new
+            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToExcel, SaveToExcel>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToPdf, SaveToPdf>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<AbstractSaveToWord, SaveToWord>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

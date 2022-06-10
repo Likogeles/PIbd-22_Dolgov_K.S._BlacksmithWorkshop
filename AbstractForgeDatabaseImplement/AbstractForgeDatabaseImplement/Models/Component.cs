@@ -12,7 +12,7 @@ namespace AbstractForgeDatabaseImplement.Models
         public int Id { get; set; }
         [Required]
         public string ComponentName { get; set; }
-        [ForeignKey("DBComponentId")]
+        [ForeignKey("ComponentId")]
         public virtual List<ManufactureComponent> ManufactureComponents { get; set; }
     }
 }
